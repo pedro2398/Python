@@ -18,7 +18,17 @@ def excluirAcessos(Array, id):
             verify = True
 
     if verify == False:
-        ("Id não encontrado!")
+        print("Procurando", end='')
+        sleep(0.3)
+        print('.', end='')
+        sleep(0.3)
+        print('.', end='')
+        sleep(0.3)
+        print('.')
+        sleep(0.5)
+        print()
+        print("Id não encontrado!")
+        print()
         
     else:
          print("Excluindo", end='')
