@@ -1,5 +1,7 @@
+from ast import Break
 from time import sleep
 import random
+import munera_3_functions
 
 login = "munera@"
 senha = "1234"
@@ -39,41 +41,82 @@ print()
 opcao_adm = 0
 
 while opcao_adm != 7:
-    opcao_adm = int(input('Oque deseja fazer? : \n' + 
+    opcao_adm = int(input(
                           '1 - Controle de acessos \n' +
                           '2 - Alteração de cadastros \n' +
                           '3 - Configuração da agenda \n' +
                           '4 - Configuração do curso \n' + 
                           '5 - Acesso ao banco de dados\n' + 
                           '6 - Outros assuntos \n' +
-                          '7 - Encerrar programa' )) 
+                          '7 - Encerrar programa \n' +
+                          'Escolha uma opção: ' )) 
     print()
-    sleep(1)
+    
+    print("Processando", end='')
+    sleep(0.3)
+    print('.', end='')
+    sleep(0.3)
+    print('.', end='')
+    sleep(0.3)
+    print('.')
     
     while opcao_adm == 1:
         opcao_adm_1 = 0
-        print(f"{'-=' * 5} Controle de acesso {'=-' * 5}")
+        (f"{'-=' * 5} Controle de acesso {'=-' * 5}")
         opcao_adm_1 = int(input("1 - Cadastro de acessos \n" + 
                                 "2 - Edição dos acessos \n" +
-                                "3 - Exclusão de acessos"))
-        if(opcao_adm_1 == 1):
-            
-        #   id = random.radint(100, 200)
-        #   verificador = True
+                                "3 - Exclusão de acessos\n"))
 
-        #   if acessos_cadastrados.
-        #        while verifcador == True:
-        #            for cadastros in acessos_cadastrados:
-        #                if cadastro['id'] == id:
-        #                    id = random.radint(100, 200)
-        #   (Verificar se o Id ja exite para n criar repeticao)
+        print("Processando", end='')
+        sleep(0.3)
+        print('.', end='')
+        sleep(0.3)
+        print('.', end='')
+        sleep(0.3)
+        print('.')
+        print()
 
-                
+        if opcao_adm_1 == 1:
 
-            nome = str(input("Informe o seu nome: "))
-            cargo  = str(input("Informe o seu cargo: "))
-            tipo_acesso = str(str("Tipo de acesso: "))
+            id = random.randint(100, 999)
+
+            cont = 0
+
+            while cont != len(acessos_cadastrados):
+                for cadastros in acessos_cadastrados:
+                    if cadastros['id'] == id:
+                        id = random.randint(100, 999)
+                    
+                        cont = 0
+                    else:
+                        cont = cont + 1
+                        print(cont)
+
+            nome = str(input("Informe o nome: "))
+            cargo  = str(input("Informe o cargo: "))
+            tipo_acesso = str(input("Tipo de acesso: "))
 
             cadastro = {"id": id,"nome": nome, "cargo": cargo, "tipo_acesso": tipo_acesso}
-    
-            acessos_cadastrados.append()
+
+            acessos_cadastrados.append(cadastro)
+
+            print("Cadastrando", end='')
+            sleep(0.3)
+            print('.', end='')
+            sleep(0.3)
+            print('.', end='')
+            sleep(0.3)
+            print('.')
+            print("Cadastro concluido!")
+            sleep(0.5)
+            print()
+
+        if opcao_adm_1 == 3:
+            munera_3_functions.exibirAcessos(acessos_cadastrados)
+            print()
+
+            id_exc = int(input("Digite o id de qual cadastro deseja excluir: "))
+
+            munera_3_functions.excluirAcessos(acessos_cadastrados, id_exc)
+        
+        break
