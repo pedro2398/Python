@@ -1,7 +1,5 @@
-from ast import Break
 from time import sleep
 import random
-from turtle import st
 import munera_3_functions
 
 login = "monera@"
@@ -12,6 +10,7 @@ resp_senha = ''
 
 acessos_cadastrados = []
 cadastros_PF = []
+cadastros_PJ = []
 
 while resp_login != login and resp_senha != senha :
     print(f"{'-=' * 5} Login ADM! {'=-' * 5}")
@@ -83,15 +82,16 @@ while opcao_adm != 7:
 
             munera_3_functions.acaoDef("Cadastrando", "Cadastro concluido!")
 
-        if opcao_adm_1 == 2:
+        elif opcao_adm_1 == 2:
+
+            print()
+            munera_3_functions.exibirAcessos(acessos_cadastrados)
+            print()
 
             esc = int(input(  
                     "1 - Nome\n2 - Cargo\n3 - Tipo de acesso\n"
                     "Oque voçê deseja alterar? : "))
 
-            print()
-            munera_3_functions.exibirAcessos(acessos_cadastrados)
-            print()
 
             id_edit = int(input("Qual o Id do acesso que voçê deseja alterar? : "))
 
@@ -103,7 +103,7 @@ while opcao_adm != 7:
                     if cadastros['id'] == id_edit:
                         cadastro['nome'] = nome_edit
 
-            if esc == 2:
+            elif esc == 2:
                 cargo_edit = str(input("Qual é o novo cargo ?: "))
                 print()
 
@@ -111,7 +111,7 @@ while opcao_adm != 7:
                     if cadastros['id'] == id_edit:
                         cadastro['cargo'] = cargo_edit
 
-            if esc == 3:
+            elif esc == 3:
                 acesso_edit = str(input("Qual é o novo tipo de acesso?: "))
                 print()
 
@@ -122,7 +122,7 @@ while opcao_adm != 7:
             munera_3_functions.acaoDef("Alterando", "Alteração concluida!")
 
 
-        if opcao_adm_1 == 3:
+        elif opcao_adm_1 == 3:
             munera_3_functions.exibirAcessos(acessos_cadastrados)
             print()
 
@@ -184,7 +184,7 @@ while opcao_adm != 7:
                         if cadastros['cpf'] == cpf_edit:
                             cadastros['nome'] = nome_edit
 
-                if esc == 2:
+                elif esc == 2:
                     data_edit = str(input("Qual a nova data?: "))
                     print()
 
@@ -192,7 +192,7 @@ while opcao_adm != 7:
                         if cadastros['cpf'] == cpf_edit:
                             cadastros['dataNasc'] = data_edit
 
-                if esc == 3:
+                elif esc == 3:
                     endereco_edit = str(input("Qual é o novo endereço?: "))
                     print()
 
@@ -200,7 +200,7 @@ while opcao_adm != 7:
                         if cadastros['cpf'] == cpf_edit:
                             cadastros['endereco'] = endereco_edit
                 
-                if esc == 4:
+                elif esc == 4:
                     telefone_edit = str(input("Qual é o novo telefone?: "))
                     print()
 
@@ -208,7 +208,7 @@ while opcao_adm != 7:
                         if cadastros['cpf'] == cpf_edit:
                             cadastro['telefone'] = telefone_edit
 
-                if esc == 5:
+                elif esc == 5:
                     email_edit = str(input("Qual é o novo email?: "))
                     print()
 
@@ -229,5 +229,83 @@ while opcao_adm != 7:
 
                 munera_3_functions.excluirAcessos_PF(cadastros_PF, cpf_exc)
 
+        elif opcao_adm_2 == 2:
+             opcao_adm_2_PJ = int(input(f"1 - Adicionar\n" +
+                                         "2 - Editar\n" +
+                                         "3 - Excluir\n" +
+                                         "Escolha uma opção: "
+             ))
+             
+             if opcao_adm_2_PJ == 1:
+
+                munera_3_functions.processandoDef()
+
+                cnpj = str(input("Informe o CNPJ: "))
+                razaoSocial = str(input("Informe a razão social: "))
+                endereco_Pj = str(input("Infome o endereço: "))
+                telefone_Pj = str(input("Informe o telefone: "))
+                email_Pj = str(input("Informe o email: "))
+
+                cadastro_PJ = {"cnpj": cnpj, "razaoSocial": razaoSocial, "endereco": endereco_Pj, "telefone": telefone_Pj, "email": email_Pj}
+                cadastros_PJ.append(cadastro_PJ)
+
+                munera_3_functions.acaoDef("Cadastrando", "Cadstro concluido!")
+
+             elif opcao_adm_2_PJ == 2:
+        
+                esc = int(input(  
+                        "\n1 - Razão social\n2 - Endereço\n3 - Telefone\n4 - Email\n"
+                        "Oque voçê deseja alterar? : "))
+
+                print()
+                munera_3_functions.exibirAcessos(cadastros_PJ)
+                print()
+
+                cnpj_edit = str(input("Qual o CNPJ do acesso que voçê deseja alterar? : "))
+
+                if esc == 1:
+                    rs_edit = str(input("Qual é a nova razão social?: "))
+                    print()
+
+                    for cadastros in cadastros_PJ:
+                        if cadastros['cnpj'] == cnpj_edit:
+                            cadastros['razaoSocial'] = rs_edit
+
+                elif esc == 2:
+                    endereco_edit = str(input("Qual é o novo endereço?: "))
+                    print()
+
+                    for cadastros in cadastros_PJ:
+                        if cadastros['cnpj'] == cnpj_edit:
+                            cadastros['endereco'] = endereco_edit
+                
+                elif esc == 3:
+                    telefone_edit = str(input("Qual é o novo telefone?: "))
+                    print()
+
+                    for cadastros in cadastros_PJ:
+                        if cadastros['cnpj'] == cnpj_edit:
+                            cadastro['telefone'] = telefone_edit
+
+                elif esc == 4:
+                    email_edit = str(input("Qual é o novo email?: "))
+                    print()
+
+                    for cadastros in cadastros_PJ:
+                        if cadastros['cnpj'] == cnpj_edit:
+                            cadastros['email'] = email_edit
+
+                munera_3_functions.acaoDef("Alterando", "Alteração concluida!")
+
+             elif opcao_adm_2_PJ == 3:
+
+                munera_3_functions.processandoDef()
+
+                munera_3_functions.exibirAcessos(cadastros_PJ)
+                print()
+
+                cnpj_exc = str(input("Informe o CNPJ para exclusão: "))
+
+                munera_3_functions.excluirAcessos_PJ(cadastros_PJ, cnpj_exc)
+        
         break
-    #Agora falta fazer o cadastro PJ

@@ -97,3 +97,37 @@ def excluirAcessos_PF(Array, cpf):
          print("Excluido!")
          sleep(0.5)
          print()
+
+def excluirAcessos_PJ(Array, cnpj):
+
+    verify = False
+
+    for cadastros in Array:
+        if cadastros['cnpj'] == cnpj:
+            Array.remove(cadastros)
+            verify = True
+
+    if verify == False:
+        print("Procurando", end='')
+        sleep(0.3)
+        print('.', end='')
+        sleep(0.3)
+        print('.', end='')
+        sleep(0.3)
+        print('.')
+        sleep(0.5)
+        print()
+        print("CNPJ não encontrado!")
+        print()
+        
+    else:
+         print("Excluindo", end='')
+         sleep(0.3)
+         print('.', end='')
+         sleep(0.3)
+         print('.', end='')
+         sleep(0.3)
+         print('.')
+         print("Excluido!")
+         sleep(0.5)
+         print()
