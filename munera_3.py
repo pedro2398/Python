@@ -2,7 +2,7 @@ from time import sleep
 import random
 import munera_3_functions
 
-login = "monera@"
+login = "munera@"
 senha = "1234"
 
 resp_login = ''
@@ -11,8 +11,9 @@ resp_senha = ''
 acessos_cadastrados = []
 cadastros_PF = []
 cadastros_PJ = []
+calendario = []
 
-while resp_login != login and resp_senha != senha :
+while resp_login != login or resp_senha != senha :
     print(f"{'-=' * 5} Login ADM! {'=-' * 5}")
     resp_login = str(input("Informe o seu login: "))
     resp_senha = str(input("Informe a sua senha: "))
@@ -20,7 +21,7 @@ while resp_login != login and resp_senha != senha :
 
     munera_3_functions.processandoDef()
 
-    if resp_login != login and resp_senha != senha:
+    if resp_login != login or resp_senha != senha:
         print()
         print('Senha ou login incorretos!')
         print()
@@ -35,7 +36,7 @@ print()
 
 opcao_adm = 0
 
-while opcao_adm != 7:
+while opcao_adm != 5:
     opcao_adm = int(input(
                           '1 - Controle de acessos \n' +
                           '2 - Alteração de cadastros \n' +
@@ -119,6 +120,9 @@ while opcao_adm != 7:
                     if cadastros['id'] == id_edit:
                         cadastro['tipo_acesso'] = acesso_edit
 
+            else:
+                print("Opção inválida!")
+
             munera_3_functions.acaoDef("Alterando", "Alteração concluida!")
 
 
@@ -130,6 +134,9 @@ while opcao_adm != 7:
 
             munera_3_functions.excluirAcessos(acessos_cadastrados, id_exc)
         
+        else:
+            print("Opção inválida!")
+
         break
 
     while opcao_adm == 2:
@@ -216,6 +223,9 @@ while opcao_adm != 7:
                         if cadastros['cpf'] == cpf_edit:
                             cadastros['email'] = email_edit
 
+                else:
+                    print("Opção inválida!")
+
                 munera_3_functions.acaoDef("Alterando", "Alteração concluida!")
 
              elif opcao_adm_2_PF == 3:
@@ -228,6 +238,9 @@ while opcao_adm != 7:
                 cpf_exc = str(input("Informe o cpf para exclusão: "))
 
                 munera_3_functions.excluirAcessos_PF(cadastros_PF, cpf_exc)
+            
+             else:
+                 print("Opção inválida!")
 
         elif opcao_adm_2 == 2:
              opcao_adm_2_PJ = int(input(f"1 - Adicionar\n" +
@@ -295,6 +308,9 @@ while opcao_adm != 7:
                         if cadastros['cnpj'] == cnpj_edit:
                             cadastros['email'] = email_edit
 
+                else:
+                    print("Opção inválida!")
+
                 munera_3_functions.acaoDef("Alterando", "Alteração concluida!")
 
              elif opcao_adm_2_PJ == 3:
@@ -308,4 +324,68 @@ while opcao_adm != 7:
 
                 munera_3_functions.excluirAcessos_PJ(cadastros_PJ, cnpj_exc)
         
+             else:
+                print("Opção inválida!")
+
+        break
+
+    while opcao_adm == 3:
+        
+        opcao_adm_3 = int(input(f"{'-=' * 5} Configuração do calendario {'-=' * 5}\n" + 
+                                 "1 - Atualizar sincronização com o Google\n" +
+                                 "2 - Incluir eventos\n" +
+                                 "3 - Exibir eventos\n"+
+                                 "Escolha uma opção : "
+                                 ))
+        
+        munera_3_functions.processandoDef()
+
+        if opcao_adm_3 == 1:
+            munera_3_functions.acaoDef("Sincronizando", "Sincronização concluida com sucesso!")
+
+        elif opcao_adm_3 == 2:
+            tit_evento = str(input("Titulo: "))
+            data_evento = str(input("Data: "))
+            link_evento = str(input("Link: "))
+            empresa_evento = str(input("Empresa: "))
+
+            evento = {"titulo": tit_evento, "data": data_evento, "link": link_evento, "empresa": empresa_evento}
+            calendario.append(evento)
+
+            munera_3_functions.acaoDef("Adicionando evento", "Evento cadastrado!")
+        
+        elif opcao_adm_3 == 3:
+
+            for evento in calendario:
+                    print(f"Titulo: {evento['titulo']} || Data: {evento['data']} || Link: {evento['link']} || Empresa: {evento['empresa']}")
+            print()
+        
+        else:
+            print("Opção inválida!")
+
+        break
+
+    while opcao_adm == 4:
+
+        opcao_adm_4 = int(input(f"{'-=' * 5} Acesso ao banco de dados {'-=' * 5}\n" + 
+                                "1 - Cadastros de pessoas fisicas\n2 - Cadastros de empresas\nEscolha uma opção: "
+                                ))
+        
+        munera_3_functions.processandoDef()
+
+        if opcao_adm_4 == 1:
+            for pf in cadastros_PF:
+                print(f"CPF: {pf['cpf']} || Nome: {pf['nome']} || Data de nascimento: {pf['dataNasc']} || Endereco: {pf['endereco']} || Telefone: {pf['telefone']} || Email: {pf['email']}")
+
+            print()
+            
+        elif opcao_adm_4 == 2:
+            for pj in cadastros_PJ:
+                print(f"CNPJ: {pj['cnpj']} || Razão social {pj['razaoSocial']} || Endereco: {pj['endereco']} || Telefone: {pj['telefone']} || Email: {pj['email']} ")    
+
+            print()
+
+        else:
+            print("Opção inválida!")
+
         break
