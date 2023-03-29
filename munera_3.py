@@ -2,8 +2,9 @@ from time import sleep
 import random
 import munera_3_functions
 
-login = "munera@"
-senha = "1234"
+login = "munera@" # login para iniciar o programa
+senha = "1234"    # senha para iniciar o programa
+
 
 resp_login = ''
 resp_senha = ''
